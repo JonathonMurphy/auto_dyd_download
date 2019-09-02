@@ -49,13 +49,14 @@ def download_dyd_report(username, password, directory="./", headless=True, timeo
         The path to the folder where the file(s) will be downloaded.
     headless : boolean, defaults to True
         Determines if Selenium runs in headless mode or not.
-    timeout : int, defaults to 120 (1 minutes)
+    timeout : int, defaults to 120
         How many seconds to wait until timing out.
     nfiles : int, defaults to 1
         If provided, waits for the number of files specified.
 
 
     """
+    print("auto_dyd_download: Starting")
     # Setup
     prefs = {'download.default_directory' : directory}
     options = webdriver.ChromeOptions()
@@ -66,6 +67,7 @@ def download_dyd_report(username, password, directory="./", headless=True, timeo
     if headless == True:
         options.add_argument('--headless')
     driver = webdriver.Chrome("./chromedriver", options=options)
+    print("auto_dyd_download: Opening Selenium")
     # Links
     login_page = "https://mclass.amplify.com"
     masq_login_page = "https://mclass.amplify.com/mobilelogin/internal_educator_login" # Must be on VPN
@@ -97,7 +99,9 @@ def download_dyd_report(username, password, directory="./", headless=True, timeo
     confirm_download = driver.find_element_by_css_selector("button.btn.btn-primary.ng-binding")
     confirm_download.click()
     print("auto_dyd_download: Initiating download of DYD report")
+    # A json log gets posted to the console in what I believe is the client logs that could be used as an indicator that the download has truely started
+    print(driver.get_log("client"))
     download_wait(directory, timeout, nfiles)
     driver.quit()
 
-download_dyd_report("jmurphy", "somePassword", "/Users/jmurphy/Downloads/GitHub/workShit", False)
+download_dyd_report("", "", "/Users/jmurphy/Downloads/GitHub/workShit", False)

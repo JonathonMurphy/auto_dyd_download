@@ -103,5 +103,3 @@ def download_dyd_report(username, password, directory="./", headless=True, timeo
     print(driver.get_log("client"))
     download_wait(directory, timeout, nfiles)
     driver.quit()
-
-download_dyd_report("", "", "/Users/jmurphy/Downloads/GitHub/workShit", False)

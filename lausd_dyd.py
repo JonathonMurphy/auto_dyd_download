@@ -35,7 +35,7 @@ def download_wait(directory, timeout, nfiles):
         seconds += 1
     return seconds
 
-def download_dyd_report(username, password, directory="./", headless=True, timeout=120, nfiles=1):
+def auto_dyd_report(username, password, directory="./", headless=True, timeout=120, nfiles=1):
     """
     Downloads the standard 18/19 DYD Report for the specified user.
 
@@ -100,6 +100,7 @@ def download_dyd_report(username, password, directory="./", headless=True, timeo
     confirm_download.click()
     print("auto_dyd_download: Initiating download of DYD report")
     # A json log gets posted to the console in what I believe is the client logs that could be used as an indicator that the download has truely started
+    # I could also use the a WebDriverWait on the loading animation to become invisible
     print(driver.get_log("client"))
     download_wait(directory, timeout, nfiles)
     driver.quit()

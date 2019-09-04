@@ -19,9 +19,7 @@ def enable_download_in_headless_chrome(driver, download_dir):
 
     params = {'cmd': 'Page.setDownloadBehavior', 'params': {'behavior': 'allow', 'downloadPath': download_dir}}
     command_result = driver.execute("send_command", params)
-    print("response from browser:")
-    for key in command_result:
-        print("result:" + key + ":" + str(command_result[key]))
+    
 
 def download_wait(directory, timeout, nfiles):
     """
@@ -126,4 +124,5 @@ def auto_dyd_report(username, password, report_url, directory="./", headless=Tru
         EC.invisibility_of_element_located((By.CLASS_NAME, "download-progress-icon"))
     )
     download_wait(directory, timeout, nfiles)
+    print("auto_dyd_report: Download complete")
     driver.quit()

@@ -7,7 +7,8 @@
 
 ## Dependencies
 
-* Selenium
+* [Selenium](https://selenium-python.readthedocs.io/installation.html)
+  * pip install selenium
 
 ## Author
 
